@@ -16,7 +16,7 @@ def download_filelist(request, s):
         for e in empty:
             e.delete()
         ord = Order.objects.filter(download = False)
-        if req:
+        if ord:
             path = os.path.join(PROJECT_ROOT,'media','file_list.txt')
             fileHandle = open(path,'w')
             content = ""
