@@ -1,0 +1,34 @@
+{% extends "order.html" %}
+
+{% block content %}
+<div class="offset2">
+
+    <form id="fileupload" method="post" action="." enctype="multipart/form-data">{% csrf_token %}
+        <p style="font-size:18px;color:#868686;padding:20px 0">Tips: 可以按住ctrl或command选中多个文件哦，也可以按多次添加</p>
+
+        <fieldset>
+            <div id="legend" class="">
+                <legend class="">上传打印文件
+                    <div class="pull-right" style="color:#DFDFDF;font-size:20px">
+                    step 4 of 4
+                    </div>
+                </legend>
+            </div>
+            <div class="span2">
+            <span class="btn btn-info fileinput-button">
+                <i class="icon-plus icon-white"></i>
+                <span>添加文件...</span>
+                <input type="file" name="file" multiple>
+            </span>
+            </div>
+            <div class="offset2">
+            <button type="submit" class="btn btn-success">
+                <i class="icon-upload icon-white"></i>
+                <span>上传</span>
+            </button>
+            <span style="color:#ff0000">{{warning}}</span>
+            </div>
+        </fieldset>
+    </form>
+</div>
+{% endblock %}

@@ -1,0 +1,141 @@
+{%extends "base.html"%}
+{%block title%}
+浏览器支持
+{%endblock%}
+{%block extraheadertitle%}浏览器支持{%endblock%}
+{%block content%}
+<div id="wiki-content">
+    <div class="wrap">
+        <div id="wiki-body" class="gollum-markdown-content instapaper_body">
+            <div class="markdown-body">
+                <h2>Multiple File selection批量上传</h2>
+                
+                <p>The following browsers support multiple file selection:以下浏览器支持批量上传：</p>
+                
+                <h3>Desktop browsers桌面浏览器</h3>
+                
+                <ul>
+                    <li>Google Chrome</li>
+                    <li>Apple Safari 5.0+</li>
+                    <li>Mozilla Firefox 3.6+</li>
+                    <li>Opera 11.0+</li>
+                    <li>Microsoft Internet Explorer 10.0+</li>
+                </ul><h3>Mobile browsers移动浏览器</h3>
+                
+                <ul>
+                    <li>Apple Safari Mobile on iOS 6.0+</li>
+                    <li>Google Chrome on iOS 6.0+</li>
+                </ul><h3>Known bugs已知的bugs：</h3>
+                
+                <p>Safari on Windows has <a href="http://stackoverflow.com/questions/7231054/file-input-size-issue-in-safari-for-multiple-file-selection">a bug</a> and reports a file size of 0 bytes when selecting multiple files. Selecting single files works.</p>
+                
+                <h3>Folder selection文件夹上传</h3>
+                
+                <p>It is possible to select a complete folder structure, though this is currently only supported by Google Chrome.目前只有Google Chrome支持文件夹上传操作<br>
+                To enable this feature, the following vendor-specific <strong>directory</strong> attributes have to be added to the file input field:</p>
+                
+                <div class="highlight"><pre><span class="o">&lt;</span><span class="nx">input</span> <span class="nx">type</span><span class="o">=</span><span class="s2">"file"</span> <span class="nx">name</span><span class="o">=</span><span class="s2">"files[]"</span> <span class="nx">multiple</span> <span class="nx">directory</span> <span class="nx">webkitdirectory</span> <span class="nx">mozdirectory</span><span class="o">&gt;</span>
+                </pre></div>
+                
+                <h2>Drag &amp; Drop拖动上传</h2>
+                
+                <p>The following browsers support drag &amp; drop:以下浏览器支持拖动上传：</p>
+                
+                <ul>
+                    <li>Google Chrome</li>
+                    <li>Apple Safari 5.0+</li>
+                    <li>Mozilla Firefox 4.0+</li>
+                    <li>Opera 12.0+</li>
+                    <li>Microsoft Internet Explorer 10.0+</li>
+                </ul><h3>Known bugs已知的bugs：</h3>
+                
+                <p>Safari on Windows has a bug that adds "" characters at the end of the file name or mangles the file name in another way and reports a file size of 0 bytes when dropping files. Trying to drop the same file(s) again seems to work.</p>
+                
+                <h3>Folder Drag&amp;Drop文件夹拖动上传</h3>
+                
+                <p>It is possible to drag&amp;drop a complete folder structure, though this is currently only supported by Google Chrome.目前只有Google Chrome支持此操作。</p>
+                
+                <h2>Upload progress显示上传进度</h2>
+                
+                <p>The following browsers have complete support for upload progress indication:以下浏览器可以显示上传进度：</p>
+                
+                <h3>Desktop browsers桌面浏览器</h3>
+                
+                <ul>
+                    <li>Google Chrome</li>
+                    <li>Apple Safari 5.0+</li>
+                    <li>Mozilla Firefox 4.0+</li>
+                    <li>Opera 12.0+</li>
+                    <li>Microsoft Internet Explorer 10.0+</li>
+                </ul><h3>Mobile browsers移动浏览器</h3>
+                
+                <ul>
+                    <li>Apple Safari Mobile on iOS 6.0+</li>
+                </ul><h3>Differences in upload progress events</h3>
+                
+                <p>Depending on the size of the file, the operating system platform and the network throughput, the number of progress events triggered might differ.<br>
+                e.g. Google Chrome might only trigger one progress event for the upload of a 100KB file on Windows XP, but trigger multiple progress events for the same file on Windows 7 and Mac OSX (tested with Google Chrome version 22.0.1229.94).</p>
+                
+                <p>Please also note that some programs that analyze network traffic are known to interfere with the number of progress events triggered, e.g. Web Debugging Proxies or Firewall/Antivirus software.</p>
+                
+                <h2>File meta data</h2>
+                
+                <p>The following browsers report complete file meta data prior to uploading files:</p>
+                
+                <h3>Desktop browsers</h3>
+                
+                <ul>
+                    <li>Google Chrome</li>
+                    <li>Apple Safari 4.0+</li>
+                    <li>Mozilla Firefox 3.6+</li>
+                    <li>Opera 10.0+</li>
+                    <li>Microsoft Internet Explorer 10.0+</li>
+                </ul><h3>Mobile browsers</h3>
+                
+                <ul>
+                    <li>Apple Safari Mobile on iOS 6.0+</li>
+                    <li>Google Chrome on iOS 6.0+</li>
+                    <li>Default Browser on Android 3.2+</li>
+                </ul><h3>File meta data properties</h3>
+                
+                <p>The reported file meta data consists of the following properties:</p>
+                
+                <ul>
+                    <li>
+                        <strong>name</strong>: The name of the file, e.g. <em>banana.jpg</em>.</li>
+                    <li>
+                        <strong>size</strong>: The size of the file in bytes, e.g. <em>130073</em> (131 KB).</li>
+                    <li>
+                        <strong>type</strong>: The type of the file, e.g. <em>image/jpg</em>.</li>
+                </ul><h3>Known bugs</h3>
+                
+                <p>The default browser on Android 4.1.2 doesn't report the file type.</p>
+                
+                <h2>XMLHttpRequest File Uploads</h2>
+                
+                <p>The following browsers support <a href="https://developer.mozilla.org/en/XmlHttpRequest">XHR</a> file uploads, which allows advanced usage of the file upload <a class="internal present" href="/blueimp/jQuery-File-Upload/wiki/API">API</a>:</p>
+                
+                <h3>Desktop browsers</h3>
+                
+                <ul>
+                    <li>Google Chrome</li>
+                    <li>Apple Safari 5.0+</li>
+                    <li>Mozilla Firefox 4.0+</li>
+                    <li>Opera 12.0+</li>
+                    <li>Microsoft Internet Explorer 10.0+</li>
+                </ul><h3>Mobile browsers</h3>
+                
+                <ul>
+                    <li>Apple Safari Mobile on iOS 6.0+</li>
+                    <li>Google Chrome on iOS 6.0+</li>
+                    <li>Default Browser on Android 3.2+</li>
+                </ul><h3>Iframe Transport</h3>
+                
+                <p>The <a href="https://github.com/blueimp/jQuery-File-Upload/blob/master/js/jquery.iframe-transport.js#files">Iframe Transport</a> is used for other browsers. The Iframe Transport requires a file input selection to upload files.</p>
+                
+            </div>
+        </div>
+    </div>
+    
+</div>
+{%endblock%}

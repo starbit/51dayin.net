@@ -1,0 +1,13 @@
+{% extends "order.html"  %}
+{% block title %}账户管理{% endblock %}
+{%block extraheader%}{%endblock%}
+
+{% block content %}
+<div class="offset2"style="padding:15px 0 30px 0;">
+<ul class="nav nav-tabs" style="font-size:18px">
+    <li class="{%if active1 == 'profile'%}active{%endif%}"><a href='/settings/profile/'>账户查询</a></li>
+    <li class="{%if active2 == 'psw'%}active{%endif%}"><a href='/settings/psw/'>更改密码</a></li>
+</ul>
+<p style="font-size:20px;color:#868686">暂且不支持查询哦~</p>
+</div>
+{% endblock %}

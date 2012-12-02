@@ -1,0 +1,13 @@
+{% extends "order.html" %}
+{%block extraheadertitle%}
+预约完成
+{%endblock%}
+
+{%block content%}
+<div class="offset2">
+    <p style="font-size:20px;line-height:200%;padding:20px 0">恭喜你，预约已完成！你的预约编号为 <span style="color:#33ccff;font-size:25px">{{resv_number}}</span><br/>请在预约好的时间，凭借此编号去相应打印社取文件。现场付款。<br/>记得及时取文件哦~你的文件会在服务器上保留48小时。</p>
+    <div style="padding:30px 0">
+    <a class="btn btn-primary" href="/file/">返回</a>
+    </div>
+</div>
+{%endblock%}

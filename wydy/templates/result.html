@@ -1,0 +1,10 @@
+{%extends "base.html"%}
+{%block title%}上传结果{%endblock%}
+
+{%block content%}
+
+<script>
+    document.body.innerText=document.body.textContent=decodeURIComponent(window.location.search.slice(1));
+    alert(document.body.innerText);
+    </script>
+{%endblock%}

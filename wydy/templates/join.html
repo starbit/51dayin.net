@@ -1,0 +1,102 @@
+{% extends "base.html"%}
+{% block title %}注册╮(╯▽╰)╭{% endblock %}
+{%block extraheadertitle%}
+注册
+{%endblock%}
+{% block content %}
+<div class="span8 offset2">
+<form class="form-horizontal" method="post">
+    {% csrf_token %}
+    <fieldset>
+    
+         <div class="control-group">
+            
+            <!-- Text input--><br/><br/>
+            <label class="control-label" for="id_cardnumber">卡号</label>
+            <div class="controls">
+                <input type="text" placeholder="" class="input-xlarge" id="id_cardnumber" name="cardNumber">&nbsp;
+                    {{form.cardNumber.errors.0}}
+                    <p class="help-block">在打印社购买的充值卡的卡号⊙▽⊙</p>
+                    </div>
+        </div>
+        
+        <div class="control-group">
+            
+            <!-- Text input-->
+            <label class="control-label" for="id_cardpassword">卡密</label>
+            <div class="controls">
+                <input type="text" placeholder="" class="input-xlarge" id="id_cardpassword" name="cardPassword">&nbsp;
+                    {{form.cardPassword.errors.0}}
+                    <p class="help-block"></p>
+                    </div>
+        </div>
+        
+        <div class="control-group">
+            
+            <!-- Text input-->
+            <label class="control-label" for="id_username">帐号</label>
+            <div class="controls">
+                <input type="text" placeholder="壮哉我大计院是53开头" class="input-xlarge" id="id_username" name="username">&nbsp;
+                    {{form.username.errors.0}}
+                    <p class="help-block"style="line-height:150%">要用教学号哦(说了多少遍了不是行政号! ←_←
+                    <br/>
+                    傻傻分不清楚的童鞋请看 <a href="/major_id/">这里</a>
+                    </p>
+                    </div>
+        </div>
+        
+        <div class="control-group">
+            
+            <!-- Text input-->
+            <label class="control-label" for="id_password">密码</label>
+            <div class="controls">
+                <input type="password" placeholder="嘛..很多东西都是越长越好的" class="input-xlarge" id="id_password" name="password">&nbsp;
+                    {{form.password.errors.0}}
+                    <p class="help-block">8~16个字符</p>
+                    </div>
+        </div>
+        
+        <div class="control-group">
+            
+            <!-- Text input-->
+            <label class="control-label" for="id_confirmpassword">重复</label>
+            <div class="controls">
+                <input type="password" placeholder="" class="input-xlarge" id="id_confirmpassword" name="confirm_password">&nbsp;
+                    {{form.confirm_password.errors.0}}
+                    <p class="help-block"></p>
+                    </div>
+        </div>
+        
+        <div class="control-group">
+            
+            <!-- Text input-->
+            <label class="control-label" for="id_email">邮箱</label>
+            <div class="controls">
+                <input type="text" placeholder="fiftycent@people.cn" class="input-xlarge" id="id_email" name="email">&nbsp;
+                    {{form.email.errors.0}}
+                    <p class="help-block">用于找回密码，请正确填写哦</p>
+                    </div>
+        </div>
+        
+        <div class="control-group">
+            
+            <!-- Text input-->
+            <label class="control-label" for="id_phone">手机</label>
+            <div class="controls">
+                <input type="text" placeholder="here's my number, so call me maybe" class="input-xlarge" id="id_phone" name="phone">&nbsp;
+                    {{form.phone.errors.0}}
+                    <p class="help-block">特殊情况什么的，打印社要联系你的啦</p>
+                    </div>
+        </div>
+        
+        </fieldset>
+     
+        <div class="form-actions">
+            <button type="submit" class="btn-primary">注册</button>
+        </div>
+
+        
+    
+</form>
+</div>
+{% endblock %}

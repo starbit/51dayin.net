@@ -1,0 +1,109 @@
+{% extends "order.html" %}
+{% block title%}预约打印{%endblock%}
+
+
+{%block content%}
+<!--选择打印社-->
+<div class="offset2">
+
+    <form action="." class="form-horizontal" method="POST" style="padding:20px 0 0 0;">{%csrf_token%}
+        <p style="font-size:18px;color:#868686">Tips: 一份要求列表对应一个或多个文件，填完要求并传好文件后还可以增加其他的要求和文件</p>
+       <fieldset>
+        <div id="legend" class="">
+            <legend class="">添加打印要求
+                <div class="pull-right" style="color:#DFDFDF;font-size:20px">
+                    step 3 of 4
+                </div>
+            </legend>
+        </div>
+        
+        <div class="control-group">
+            
+            <label class="control-label">纸张规格</label>
+            <div class="controls">
+                <select name="paper" class="input-xlarge">
+                    <option value="A4">A4</option>
+                    <option value="B5">B5</option>
+                </select>{{form.paper.errors.0}}
+            </div>
+            
+        </div>
+        
+        
+        
+        <div class="control-group">
+            
+            <label class="control-label">页面范围</label>
+            <div class="controls">
+                <select name="range"class="input-xlarge">
+                    <option value="全部">全部</option>
+                    <option value="自定义">自定义</option>
+                </select>{{form.range.errors.0}}
+                <p class="help-block">自定义请在备注中声明，如1——20页，不声明默认为全部</p>
+                
+            </div>
+        </div>
+        
+        
+        <div class="control-group">
+            <label class="control-label">单双面</label>
+            <div class="controls">
+                <select name="singleordouble"class="input-xlarge">
+                    <option value="双面">双面</option>
+                    <option value="单面">单面</option>
+                </select>{{form.singleordouble.errors.0}}
+                
+            </div>
+        </div>
+        
+        <div class="control-group">
+            
+            <label class="control-label">打印版式</label>
+            <div class="controls">
+                <select  name="style" class="input-xlarge">
+                    <option value="1">每页1版(适合.doc/.pdf)</option>
+                    <option value="2">每页2版</option>
+                    <option value="4">每页4版</option>
+                    <option value="6">每页6版</option>
+                    <option value="8">每页8版(适合.ppt)</option>
+                    <option value="9">每页9版(适合.ppt)</option>
+
+                </select>{{form.style.errors.0}}
+            </div>
+            
+        </div>
+        
+        <div class="control-group">
+            
+            <label class="control-label">打印</label>
+            <div class="controls">
+                <div class="input-append">
+                    <input name="copies"class="span2" type="text">
+                        <span class="add-on">份</span>
+                </div>
+                <p class="help-block">至少1份，最多50份</p>
+                <p style="color:#ff0000">{{form.copies.errors.0}}</p>
+            </div>
+            
+        </div>
+        
+        <div class="control-group">
+            
+            <label class="control-label">备注（特殊要求）</label>
+            <div class="control">
+                <div class="textarea">
+                    <textarea name="note" type="text" class="input-xlarge" style="margin:20px 0 20px 20px"> </textarea>{{form.note.errors.0}}
+                </div>
+            </div>
+        </div>
+        
+    </fieldset>
+    <div class="form-actions">
+        <button type="submit" class="btn-primary">下一步</button>
+        <a class="btn btn-primary"  href="/file/cancel/{{user_id}}/{{ord_id}}/">放弃预约</a>
+
+    </div>
+</form>
+</div>
+
+{% endblock %}
