@@ -9,12 +9,13 @@
 <script type="text/javascript">
                                             $(function() {
     $("#fileupload").uploadify({
-        height        : 40,
-        swf           : '/static/uploadify.swf',
-        uploader      : '/file/uploadhandle/{{ user_id }}/{{ ord_id }}/{{ req_id}}/',
-        width         : 150,
-        fileTypeExts:'*.ppt;*.pptx;*.pdf;*.txt;*.doc;*.docx',
-        queueSizeLimit:10,
+        'height'        : 40,
+        'swf'           : '/static/uploadify.swf',
+        'uploader'      : '/file/uploadhandle/{{ user_id }}/{{ ord_id }}/{{ req_id}}/',
+        'width'         : 150,
+        'fileTypeExts':'*.ppt;*.pptx;*.pdf;*.txt;*.doc;*.docx',
+        'uploadLimit':10,
+        'buttonText':'添加文件',
     });
 });                                     
 </script>
