@@ -10,6 +10,7 @@ from user.models import ResvNumber
 from datetime import datetime,date,timedelta
 import os
 from wydy.settings import PROJECT_ROOT
+from django.views.decorators.csrf import csrf_exempt
 
 
 def gen():
@@ -25,46 +26,47 @@ def gen():
     number.save()
     return s1
 
+@csrf_exempt
+def upload_handle(request, user_id, ord_id, req_id):
+    """
+    receive file 
+    """
+    if  request.FILES:
+
+        req = Requirement.objects.get(id = req_id)
+        ord = Order.objects.get(id = ord_id)
+        for file in request.FILES.getlist('Filedata'):
+            print 'file  name',file.name
+            f = File(slug = ord.slug)
+            f.requirement_id = req_id
+            f.file = file
+            f.save()
+            req.file.add(f)
+        
+            #保存相应的打印要求文件
+            import codecs
+            path = os.path.join(PROJECT_ROOT,'media','files',ord.slug,"REQUEST%s.txt"%file.name)
+            fileHandle = codecs.open(path,encoding='utf-8',mode='w')
+            content = u"纸张:%s\n页面范围:%s\n%s\n每页%s版\n%d份\n备注:%s\n"%(req.paper,req.range,req.singleordouble,req.style,req.copies,req.note)
+            fileHandle.write(content)
+            fileHandle.close()
+
+        return HttpResponse('1')
+
+
+
+@csrf_exempt
 @login_required
 def upload(request, user_id, ord_id, req_id):
-    print user_id
-    print request.user.id
     req_id = int(req_id)
     ord_id = int(ord_id)
     req = Requirement.objects.get(id = req_id)
     ord = Order.objects.get(id = ord_id)
     #print (req.file.count())
     if (int(request.user.id) == int(user_id)) and (req.file.count() == 0):
-        if request.method == 'POST':
-            
-            if not request.FILES:
-                form = FileForm()
-                return TemplateResponse(request,"fileupload/file_form.html",{'active':'file','form':form,'warning':u'请添加文件~'})
-            else:
-            
-                upload = FileForm(request.POST,request.FILES)
-                if upload.is_valid():
-
-                    for file in request.FILES.getlist('file'):
-                        f = File(slug = ord.slug)
-                        f.requirement_id = req_id
-                        f.file = file
-                        f.save()
-                        req.file.add(f)
-                    
-                        #保存相应的打印要求文件
-            
-                        import codecs
-                        path = os.path.join(PROJECT_ROOT,'media','files',ord.slug,"REQUEST%s.txt"%file.name)
-                        fileHandle = codecs.open(path,encoding='utf-8',mode='w')
-                        content = u"纸张:%s\n页面范围:%s\n%s\n每页%s版\n%d份\n备注:%s\n"%(req.paper,req.range,req.singleordouble,req.style,req.copies,req.note)
-                        fileHandle.write(content)
-                        fileHandle.close()
-
-                    return redirect('/file/add/%d/%d/'%(int(user_id),ord_id))
-        else:
+        if request.method == 'GET':
             form = FileForm()
-        return TemplateResponse(request,"fileupload/file_form.html",{'active':'file','form':form,'warning':"",})
+        return TemplateResponse(request,"fileupload/file_form.html",{'active':'file','form':form,'warning':u'','user_id':user_id,'ord_id':ord_id,'req_id':req_id})
     else:
         return TemplateResponse(request,"404.html")
 
@@ -115,6 +117,7 @@ def cancel(request, user_id, ord_id):
 @login_required
 def add(request,user_id, ord_id):
     return TemplateResponse(request,"fileupload/add.html",{'active':'file','user_id':str(user_id),'ord_id':str(ord_id)})
+
 @login_required
 def success(request,ord_id):
     resv_number = Order.objects.get(id = ord_id).resv_number
