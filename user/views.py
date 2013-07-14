@@ -55,17 +55,7 @@ def join(request):
 def browser_support(request):
     return TemplateResponse(request,"browser_support.html")
 '''
-def major_id(request):
-    return TemplateResponse(request,"major_id.html")
 
-def about(request):
-    return TemplateResponse(request,"about.html")
-
-def home(request):
-    if request.user.is_authenticated():
-        return redirect('/file/')
-    else:
-        return TemplateResponse(request,"home.html")
 @login_required
 def tasklist(request):
 	return TemplateResponse(request,"user/tasklist.html",{'active':'tasklist'})
@@ -181,9 +171,6 @@ def contact(request):
     else:
         form=ContactForm()
     return TemplateResponse(request,'contact.html',{'form':form,'active':'contact'})
-
-def thanks(request):
-    return TemplateResponse(request,'thanks.html')
 
 def view_user(request, id):
     user_instance = User.objects.get(id = id)
