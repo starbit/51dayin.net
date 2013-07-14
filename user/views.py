@@ -59,6 +59,7 @@ def browser_support(request):
 '''
 def major_id(request):
     return TemplateResponse(request,"major_id.html")
+
 def others(request):
     return TemplateResponse(request,"others.html")
 
