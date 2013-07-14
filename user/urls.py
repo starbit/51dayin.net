@@ -21,16 +21,16 @@ urlpatterns = patterns('user.views',
     #   url(r'^user/(?P<user_id>\d+)/$','user',name='user'),
 
     url(r'^user/tasklist/$','tasklist',name='tasklist'),
+
     url(r'^about/$','about',name='about'),
-    url(r'^others/$','others',name='others'),
     #url(r'^hot/$','hot',name='hot'),
     url(r'^logout/$', auth_views.logout, {'template_name': 'user.html','next_page':'/login/'}, name='logout'),
     url(r'^settings/(?P<item>\w+)/$', 'settings', name='settings'),
 
-   
+
     (r'user/create/$', 'create_user'),
     (r'user/list/$', 'list_user' ),
     (r'user/edit/(?P<id>[^/]+)/$', 'edit_user'),
     (r'user/view/(?P<id>[^/]+)/$', 'view_user'),
-                       
+
 )

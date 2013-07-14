@@ -51,8 +51,6 @@ def join(request):
 
     return TemplateResponse(request, 'join.html', {'form': form})
 
-def about(request):
-	return TemplateResponse(request,"about.html")
 '''
 def browser_support(request):
     return TemplateResponse(request,"browser_support.html")
@@ -60,8 +58,8 @@ def browser_support(request):
 def major_id(request):
     return TemplateResponse(request,"major_id.html")
 
-def others(request):
-    return TemplateResponse(request,"others.html")
+def about(request):
+    return TemplateResponse(request,"about.html")
 
 def home(request):
     if request.user.is_authenticated():
