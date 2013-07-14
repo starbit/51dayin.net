@@ -35,21 +35,21 @@ def join(request):
             phone = form.cleaned_data['phone']
             card = Card.objects.get(number=cardNumber)
             balance = card.balance
-            user=User.objects.create_user(username=username, email=email, password=password)
-            userprofile=user.get_profile()
-            userprofile.balance=5
-            userprofile.points=0
-            userprofile.phone=phone
+            user = User.objects.create_user(username=username, email=email, password=password)
+            userprofile = user.get_profile()
+            userprofile.balance = 5
+            userprofile.points = 0
+            userprofile.phone = phone
             userprofile.save()
             card.delete()
             user = authenticate(username=username, password=password)
             login(request, user)
-            
+
             return redirect('/file/')
     else:
         form = JoinForm()
-    
-    return TemplateResponse(request, 'join.html', {'form': form})	
+
+    return TemplateResponse(request, 'join.html', {'form': form})
 
 def about(request):
 	return TemplateResponse(request,"about.html")
@@ -84,7 +84,7 @@ def profile(request):
 @login_required
 def settings(request, item):
     #profile = request.user.get_profile()
-    
+
     if item == "profile":
         return profile(request)
     elif item == "psw":
@@ -99,7 +99,7 @@ def reset_psw(request):
             form.save(domain_override=request.get_host(), from_email=DEFAULT_FROM_EMAIL, email_template_name="user/password_reset_email.html")
             return render_to_response('user/reset_psw_sended.html', {})
         else:
-            
+
             return TemplateResponse(request, 'user/reset_psw.html', {'form': form})
     form = PasswordResetForm()
     return TemplateResponse(request, 'user/reset_psw.html', {'form': form})
@@ -108,7 +108,7 @@ def reset_psw(request):
 def reset_psw_confirm(request, uid, token):
     from django.utils.http import base36_to_int
     user = User.objects.get(pk = base36_to_int(uid))
-    
+
     if request.method == 'POST':
         form = ResetPasswordForm(user, request.POST)
         if form.is_valid():
@@ -147,7 +147,7 @@ def create_user(request):
 
 
 def list_user(request):
-  
+
     list_items = User.objects.all()
     paginator = Paginator(list_items ,10)
 
