@@ -8,6 +8,10 @@ admin.autodiscover()
 
 urlpatterns = patterns('')
 
+urlpatterns += patterns('',
+    url(r'^admin/', include(admin.site.urls)),
+)
+
 urlpatterns += patterns('home.views',
     url(r'^$', 'home', name='home'),
     url(r'^about/$', 'about', name='about'),
@@ -17,10 +21,10 @@ urlpatterns += patterns('home.views',
 )
 
 urlpatterns += patterns('user.views',
-    url(r'^join/$','join',name='join'),
+    url(r'^join/$', 'join',name='join'),
     #url(r'^browser_support/$','browser_support',name='browser_support'),
 
-    url(r'^contact/$','contact',name='contact'),
+    url(r'^contact/$', 'contact',name='contact'),
 
     url(r'^login/$', auth_views.login, {'template_name': 'login.html', 'authentication_form': LoginForm }, name = 'login'),
 
@@ -28,7 +32,7 @@ urlpatterns += patterns('user.views',
     url(r'^reset/confirm/(?P<uid>\w+)/(?P<token>[-\w]+)/$', 'reset_psw_confirm', name = 'reset_psw_confirm'),
     #   url(r'^user/(?P<user_id>\d+)/$','user',name='user'),
 
-    url(r'^user/tasklist/$','tasklist',name='tasklist'),
+    url(r'^user/tasklist/$', 'tasklist',name='tasklist'),
 
     #url(r'^hot/$','hot',name='hot'),
     url(r'^logout/$', auth_views.logout, {'template_name': 'user.html','next_page':'/login/'}, name='logout'),
@@ -41,31 +45,21 @@ urlpatterns += patterns('user.views',
 )
 
 urlpatterns += patterns('fileupload.views',
-    url(r'^uploadhandle/(?P<user_id>\d+)/(?P<ord_id>\d+)/(?P<req_id>\d+)/$', 'upload_handle',name='upload-handle'),
-    url(r'^upload/(?P<user_id>\d+)/(?P<ord_id>\d+)/(?P<req_id>\d+)/$', 'upload',name='upload-new'),
+    url(r'^file/uploadhandle/(?P<user_id>\d+)/(?P<ord_id>\d+)/(?P<req_id>\d+)/$', 'upload_handle',name='upload-handle'),
+    url(r'^file/upload/(?P<user_id>\d+)/(?P<ord_id>\d+)/(?P<req_id>\d+)/$', 'upload',name='upload-new'),
 
-    url(r'^success/(?P<ord_id>\d+)/$', 'success',name='success'),
+    url(r'^file/success/(?P<ord_id>\d+)/$', 'success',name='success'),
 
-    url(r'^$', 'order',name='order'),
-    url(r'^add/(?P<user_id>\d+)/(?P<ord_id>\d+)/$', 'add',name='add'),
-    url(r'^cancel/(?P<user_id>\d+)/(?P<ord_id>\d+)/$', 'cancel',name='cancel'),
+    url(r'^file/$', 'order',name='order'),
+    url(r'^file/add/(?P<user_id>\d+)/(?P<ord_id>\d+)/$', 'add',name='add'),
+    url(r'^file/cancel/(?P<user_id>\d+)/(?P<ord_id>\d+)/$', 'cancel',name='cancel'),
 
-    url(r'^requirement/(?P<user_id>\d+)/(?P<ord_id>\d+)/$', 'requirement',name='requirement'),
+    url(r'^file/requirement/(?P<user_id>\d+)/(?P<ord_id>\d+)/$', 'requirement',name='requirement'),
 )
 
 urlpatterns += patterns('download.views',
-    url(r'^(?P<ord_slug>\S+)/$', 'download_zipfile',name='download_zipfile'),
-    url(r'^filelist/(?P<s>\w+)$', 'download_filelist',name='download_filelist'),
-)
-
-urlpatterns += patterns('',
-    url(r'^admin/', include(admin.site.urls)),
+    url(r'^download/(?P<ord_slug>\S+)/$', 'download_zipfile',name='download_zipfile'),
+    url(r'^download/filelist/(?P<s>\w+)$', 'download_filelist',name='download_filelist'),
 )
 
 urlpatterns += staticfiles_urlpatterns()
-'''
-import os
-urlpatterns += patterns('',
-                        (r'^media/(.*)$', 'django.views.static.serve', {'document_root': os.path.join(os.path.abspath(os.path.dirname(__file__)), 'media')}),
-                        )
-'''
